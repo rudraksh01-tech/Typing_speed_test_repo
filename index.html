@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Typing Speed Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    #quote {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      width: 90%;
+      max-width: 600px;
+      height: 100px;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Typing Speed Test</h1>
+  <div id="quote">Click "Start" to begin the test...</div>
+  <textarea id="inputArea" disabled placeholder="Type here..."></textarea><br>
+  <button onclick="startTest()">Start</button>
+  <div id="result"></div>
+
+  <script>
+    const quotes = [
+      "The quick brown fox jumps over the lazy dog.",
+      "Typing speed improves with practice and accuracy.",
+      "JavaScript makes websites interactive and dynamic.",
+      "Stay consistent and keep building small projects.",
+      "Frontend development involves HTML CSS and JS."
+    ];
+
+    let startTime = null;
+    let currentQuote = "";
+
+    const quoteEl = document.getElementById("quote");
+    const inputEl = document.getElementById("inputArea");
+    const resultEl = document.getElementById("result");
+
+    function startTest() {
+      // Get a random quote
+      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = currentQuote;
+
+      // Prepare UI
+      inputEl.value = "";
+      inputEl.disabled = false;
+      inputEl.focus();
+      resultEl.innerText = "";
+      startTime = new Date().getTime();
+
+      // Input checking
+      inputEl.oninput = () => {
+        const typedText = inputEl.value.trim();
+        const expectedText = currentQuote.trim();
+
+        // Only compare when input length matches or exceeds expected
+        if (typedText.length >= expectedText.length) {
+          if (typedText === expectedText) {
+            const endTime = new Date().getTime();
+            const timeTaken = (endTime - startTime) / 1000;
+            const wordCount = expectedText.split(" ").length;
+            const wpm = Math.round((wordCount / timeTaken) * 60);
+            resultEl.innerText = `✅ Completed in ${timeTaken.toFixed(2)} seconds | Speed: ${wpm} WPM`;
+            inputEl.disabled = true;
+          } else {
+            resultEl.innerText = `❌ Typing doesn't match. Check your punctuation or spacing.`;
+          }
+        }
+      };
+    }
+  </script>
+
+</body>
+</html>
