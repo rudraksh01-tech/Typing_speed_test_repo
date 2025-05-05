@@ -6,7 +6,7 @@ Welcome to the **Typing Speed Test** project! 🚀 This simple web app allows yo
 
 ## 📸 Project Preview
 
-![Typing Speed Test](https://path_to_your_image/your_image.png)
+![Typing Speed Test](https://github.com/rudraksh01-tech/Typing_speed_test_repo/blob/10ac1fdb57a6544acf7bf4a3647e75a07d7dd783/Untitled%20design.png)
 
 ---
 
